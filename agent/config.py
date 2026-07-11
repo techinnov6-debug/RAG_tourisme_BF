@@ -43,7 +43,7 @@ SEUIL_DISTANCE_MAX = 3.0
 # plus capable si le volume de requêtes le permet.
 GROQ_MODEL = "openai/gpt-oss-120b"
 GROQ_API_URL = "https://api.groq.com/openai/v1"
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")  # à définir dans l'environnement, jamais en dur dans le code
+GROQ_API_KEY = "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"  # à définir dans l'environnement, jamais en dur dans le code
 
 GROQ_TEMPERATURE = 1  # bas, pour limiter les inventions/hallucinations
 GROQ_MAX_TOKENS = 1024
