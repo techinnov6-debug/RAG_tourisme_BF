@@ -38,7 +38,7 @@ with st.sidebar:
     st.header("À propos")
     st.markdown(
         "Ce projet a été réalisé dans le cadre du cours de Data Science "
-        "(Master 1 IFOAD) — Option 4 : Guide Touristique et Culturel Intelligent."
+        "(Master 1 IFOAD)"
     )
     st.divider()
     st.subheader("État du système")
@@ -47,7 +47,7 @@ with st.sidebar:
     else:
         st.error(
             "Clé API Groq manquante. Définissez GROQ_API_KEY dans votre "
-            "environnement (voir .env.example) avant de poser une question."
+            "environnement (voir .env) avant de poursuivre."
         )
     st.caption(f"Modèle LLM : {GROQ_MODEL}")
     st.divider()
