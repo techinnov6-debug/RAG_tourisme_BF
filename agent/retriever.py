@@ -41,7 +41,7 @@ def rechercher_contexte(question: str, top_k: int = None) -> list:
     modele = _charger_modele()
     collection = _charger_collection()
 
-    vecteur_question = modele.encode([question]).tolist()
+    vecteur_question = modele.encode([question], normalize_embeddings=True).tolist()
 
     resultat = collection.query(
         query_embeddings=vecteur_question,

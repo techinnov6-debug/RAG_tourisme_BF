@@ -3,7 +3,7 @@ Construction du prompt RAG et appel au LLM via l'API Groq.
 """
 
 import requests
-from groq import Groq
+
 
 from config import (
     GROQ_API_URL, GROQ_API_KEY, GROQ_MODEL, GROQ_TEMPERATURE, GROQ_MAX_TOKENS,

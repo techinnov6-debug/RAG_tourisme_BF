@@ -11,27 +11,43 @@ stockés dans ChromaDB ne seront pas comparables.
 
 import os
 
+from dotenv import load_dotenv
+
+# Charge automatiquement les variables définies dans un fichier .env à la
+# racine du projet (ex: GROQ_API_KEY=...), s'il existe. Sans ce chargement,
+# un .env rempli mais jamais "exporté" dans le shell reste invisible pour
+# Python -- cause fréquente de "j'ai bien mis ma clé mais ça ne marche pas".
 RACINE_PROJET = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(RACINE_PROJET, ".env"))
 
 # --- ChromaDB (doit pointer vers la même base que vectorisation/) ---
 CHROMA_DB_DIR = os.path.join(RACINE_PROJET, "data", "chroma_db")
 NOM_COLLECTION = "tourisme_burkina"
 
 # --- Embeddings (DOIT rester identique à vectorisation/config.py) ---
-MODELE_EMBEDDINGS = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+MODELE_EMBEDDINGS = "all-MiniLM-L6-v2"
 
 # --- Recherche vectorielle ---
-TOP_K = 6
+TOP_K = 5
 
-# Distance ChromaDB (L2 par défaut) au-delà de laquelle on considère que
-# le meilleur résultat trouvé n'est en réalité pas pertinent -- l'agent
-# répond alors "je ne sais pas" plutôt que d'halluciner une réponse à
-# partir d'un contexte hors-sujet.
-# ATTENTION : ce seuil est une valeur de départ. Il doit être calibré
-# empiriquement en Phase 5 (évaluation), en observant les distances
-# obtenues sur des questions dont on connaît la réponse attendue et sur
-# des questions hors-périmètre.
-SEUIL_DISTANCE_MAX = 3.0
+# Distance ChromaDB (L2 au carré par défaut) au-delà de laquelle on
+# considère que le meilleur résultat trouvé n'est en réalité pas
+# pertinent -- l'agent répond alors "je ne sais pas" plutôt que
+# d'halluciner une réponse à partir d'un contexte hors-sujet.
+#
+# Avec des embeddings NORMALISÉS (voir normalize_embeddings=True dans
+# retriever.py et build_vector_store.py), cette distance est bornée entre
+# 0 (vecteurs identiques) et 4 (vecteurs opposés), et se relie à la
+# similarité cosinus par : distance = 2 - 2 * cosinus.
+#   cosinus 0.8 -> distance 0.4   (très pertinent)
+#   cosinus 0.5 -> distance 1.0   (pertinent)
+#   cosinus 0.3 -> distance 1.4   (limite)
+#   cosinus 0.0 -> distance 2.0   (aucun rapport)
+#
+# ATTENTION : reste une valeur de départ. À calibrer empiriquement avec
+# evaluation/evaluer.py, qui affiche les distances observées sur des
+# questions dont on connaît la réponse et sur des questions hors-périmètre.
+SEUIL_DISTANCE_MAX = 1.3
 
 # --- LLM via Groq ---
 # NOTE (juillet 2026) : Groq a annoncé le 17/06/2026 la dépréciation de
@@ -40,13 +56,13 @@ SEUIL_DISTANCE_MAX = 3.0
 # mais mieux vaut utiliser un modèle activement supporté pour ne pas
 # tomber en panne juste avant la soutenance. openai/gpt-oss-20b est
 # rapide et gratuit sur le palier developer ; openai/gpt-oss-120b est
-# plus capable si le volume de requêtes le permet.
+# plus capable si le volume de requêtes le permet (modèle retenu ici).
 GROQ_MODEL = "openai/gpt-oss-120b"
-GROQ_API_URL = "https://api.groq.com/openai/v1"
-GROQ_API_KEY = "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"  # à définir dans l'environnement, jamais en dur dans le code
+GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")  # à définir dans l'environnement
 
-GROQ_TEMPERATURE = 1  # bas, pour limiter les inventions/hallucinations
-GROQ_MAX_TOKENS = 1024
+GROQ_TEMPERATURE = 0.2  # bas, pour limiter les inventions/hallucinations
+GROQ_MAX_TOKENS = 700
 
 PROMPT_SYSTEME = """Tu es un guide touristique virtuel spécialisé dans le Burkina Faso.
 

@@ -9,7 +9,7 @@ documents ?").
 from config import SEUIL_DISTANCE_MAX
 from retriever import rechercher_contexte
 from generator import construire_prompt, interroger_llm, MESSAGE_JE_NE_SAIS_PAS
-
+from groq import Groq
 
 def repondre(question: str) -> dict:
     """
@@ -43,10 +43,10 @@ def repondre(question: str) -> dict:
 
 def boucle_interactive():
     """Petite boucle en ligne de commande pour tester l'agent avant la Phase 4 (UI)."""
-    print("Assistant Guide Touristique Burkina Faso (tape 'quitter' pour arrêter)\n")
+    print("Assistant Guide Touristique Burkina Faso (tape 'quitter/sortir' pour arrêter)\n")
     while True:
         question = input("Question : ").strip()
-        if question.lower() in ("quitter", "exit", "quit"):
+        if question.lower() in ("quitter", "exit", "quit","sort","sortir"):
             break
         if not question:
             continue
