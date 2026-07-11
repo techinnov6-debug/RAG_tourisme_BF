@@ -1,0 +1,13 @@
+rag-tourisme-bf/
+├── data/
+│   ├── pdfs/        ← dépose ici tes fichiers PDF bruts (manuellement)
+│   ├── raw/         ← texte extrait, un .txt par source (web ET pdf, même format)
+│   ├── manifest.json ← généré automatiquement après collecte
+│   └── sources.md
+├── ingestion/
+│   ├── config.py    ← SOURCES (web) + PDF_SOURCES (pdf)
+│   ├── utils.py      ← nettoyage de texte partagé
+│   ├── scraper.py    ← web (BeautifulSoup)
+│   ├── pdf_loader.py ← pdf (pypdf) — nouveau
+│   └── collect_data.py ← orchestre les deux en un seul manifeste
+└── requirements.txt

@@ -1,0 +1,11 @@
+requests
+beautifulsoup4
+lxml
+pypdf
+chromadb
+sentence-transformers
+langdetect
+streamlit
+langchain
+langchain_groq
+groq
