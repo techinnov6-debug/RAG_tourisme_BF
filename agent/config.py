@@ -59,7 +59,7 @@ SEUIL_DISTANCE_MAX = 1.3
 # plus capable si le volume de requêtes le permet (modèle retenu ici).
 GROQ_MODEL = "openai/gpt-oss-120b"
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_API_KEY = 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  # à définir dans l'environnement
+GROQ_API_KEY = "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"  # à définir dans l'environnement
 
 GROQ_TEMPERATURE = 0.2  # bas, pour limiter les inventions/hallucinations
 GROQ_MAX_TOKENS = 700
