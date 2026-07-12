@@ -63,7 +63,7 @@ rag-tourisme-bf/
 pip install -r requirements.txt
 ```
 
-Copier `.env.example` en `.env` à la racine du projet, puis renseigner votre
+Copier `.env` à la racine du projet, puis renseigner votre
 clé API Groq :
 
 ```
