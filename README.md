@@ -7,6 +7,9 @@ les formalités de voyage au Burkina Faso.
 Projet réalisé dans le cadre du cours de Data Science (Master 1 IFOAD-UJKZ,
 édition 2026) — Option 4 : Guide Touristique et Culturel Intelligent.
 
+## Auteurs
+ZERBO Soukrane Zanhiro, SANA Ali, SAWADOGO Aboubacary — Master 1 IFOAD-UJKZ
+
 ## Fonctionnement général
 
 1. Des pages web et des PDF officiels sont collectés et nettoyés (Phase 1).
@@ -113,18 +116,11 @@ métriques (pertinence, taux d'hallucination, aide à la calibration du seuil).
 
 ## Points d'attention connus
 
-- **Modèle d'embeddings** : `all-MiniLM-L6-v2` est majoritairement anglophone
-  alors que le corpus est en français — voir la section Limites du rapport
-  technique.
 - **Sites en JavaScript** (Booking.com, Evaneos.fr, Partir.com) : le scraper
   ne récupère que le HTML statique, pas le contenu chargé dynamiquement.
 - **Dette technique assumée** : chaque phase a son propre `config.py` et son
   propre script principal, pour rester compréhensible étape par étape durant
   le développement. Une consolidation est prévue en fin de projet.
 
-
-## Auteurs
-
-ZERBO Soukrane Zanhiro, SANA Ali, SAWADOGO Aboubacary — Master 1 IFOAD-UJKZ
 
 Encadrement : Dr Delwende D. Arthur Sawadogo
