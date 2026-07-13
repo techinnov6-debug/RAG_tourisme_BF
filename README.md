@@ -1,4 +1,6 @@
-# Guide Touristique et Culturel Intelligent - Burkina Faso
+# Guide Touristique et Culturel Intelligent - Burkina Faso  
+Lien Github : https://github.com/techinnov6-debug/RAG_tourisme_BF.git 
+Lien streamlit : https://ragtourismebf-xjix4k5vcmbzqgktbpwzer.streamlit.app/
 
 Assistant conversationnel basé sur un système RAG (Retrieval-Augmented
 Generation) pour répondre à des questions sur le tourisme, la culture et
